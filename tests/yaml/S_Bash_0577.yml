@@ -1,0 +1,57 @@
+template: true
+valuesFilePath: ../values/gitRepoValues.yml
+
+resources:
+  - name: repo
+    type: GitRepo
+    configuration:
+      gitProvider: s_gitHub
+      path: {{ .Values.GitHub.Org_test_Automation.path }}
+      
+pipelines:
+  - name: pipeline_S_Bash_0577_A
+    steps:
+      - name: S_Bash_0577_A_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing S_Bash_0577_A_1"
+
+      - name: S_Bash_0577_A_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_Bash_0577_A_1
+              status:
+                - failure
+                - error
+        execution:
+          onExecute:
+            - echo "executing S_Bash_0577_A_2"
+            
+  - name: pipeline_S_Bash_0577_B
+    steps:
+      - name: S_Bash_0577_B_1
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing S_Bash_0577_B_1"
+            - blah # failing the step on purpose
+
+      - name: S_Bash_0577_B_2
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: S_Bash_0577_B_1
+              status:
+                - failure
+                - error
+        execution:
+          onExecute:
+            - echo "executing S_Bash_0577_B_2"
