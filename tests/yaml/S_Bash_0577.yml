@@ -106,7 +106,6 @@ pipelines:
       - name: Step_S_Bash_Generic_5858_0009
         type: Bash
         configuration:
-          nodePool: invalid #purposefully giving wrong nodePool to make the step skip 
           inputResources:
             - name: repo
         execution:
@@ -187,10 +186,54 @@ pipelines:
         type: Bash
         configuration:
           inputSteps:
-            - name: Step_S_Bash_Generic_5858_0013
+            - name: Step_S_Bash_Generic_5858_0015
               status:
                 - stopped
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0016"
+  - name: Pipeline_S_Bash_Generic_5858_0009
+    steps:
+      - name: Step_S_Bash_Generic_5858_0017
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0017"
+            - sleep 60
+
+      - name: Step_S_Bash_Generic_5858_0018
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: Step_S_Bash_Generic_5858_0017
+              status:
+                - deleted
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0018"
+  - name: Pipeline_S_Bash_Generic_5858_0010
+    steps:
+      - name: Step_S_Bash_Generic_5858_0019
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0019"
+            - sleep 60
+
+      - name: Step_S_Bash_Generic_5858_0020
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: Step_S_Bash_Generic_5858_0019
+              status:
+                - cached
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0020"
             
