@@ -236,4 +236,36 @@ pipelines:
         execution:
           onExecute:
             - echo "executing Step_S_Bash_Generic_5858_0020"
+  - name: Pipeline_S_Bash_Generic_5858_0011
+    steps:
+      - name: Step_S_Bash_Generic_5858_0021
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0019"
+      - name: Step_S_Bash_Generic_5858_0022
+        type: Bash
+        configuration:
+          inputResources:
+            - name: repo
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0019"
+
+      - name: Step_S_Bash_Generic_5858_0023
+        type: Bash
+        configuration:
+          inputSteps:
+            - name: Step_S_Bash_Generic_5858_0021
+              status:
+                - success
+            - name: Step_S_Bash_Generic_5858_0022
+              status:
+                - error
+        execution:
+          onExecute:
+            - echo "executing Step_S_Bash_Generic_5858_0020"
             
